@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAIMANA AI | National Infrastructure Monitoring & Early Warning System</title>
+  <meta name="description" content="AI-Powered Predictive Analytics and Early Warning Decision Support System for Infrastructure Projects Monitored by MoSPI IPMD.">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/styles.css">
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-badge">P</div>
+        <div class="brand-info">
+          <h1>PAIMANA AI</h1>
+          <p>MoSPI • IPMD Division</p>
+        </div>
+      </div>
+      
+      <ul class="nav-links">
+        <li>
+          <a href="#cockpit" class="nav-item active" data-tab="tab-cockpit">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>
+            <span>National Cockpit</span>
+          </a>
+        </li>
+        <li>
+          <a href="#geomap" class="nav-item" data-tab="tab-geomap">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" /></svg>
+            <span>Geo-Spatial Map</span>
+          </a>
+        </li>
+        <li>
+          <a href="#explorer" class="nav-item" data-tab="tab-explorer">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" /></svg>
+            <span>Project 360° Explorer</span>
+          </a>
+        </li>
+        <li>
+          <a href="#simulator" class="nav-item" data-tab="tab-simulator">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg>
+            <span>What-If Sandbox</span>
+          </a>
+        </li>
+        <li>
+          <a href="#ewas" class="nav-item" data-tab="tab-ewas">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" /></svg>
+            <span>Early Warning Center</span>
+            <span class="nav-badge" id="nav-alert-badge">0</span>
+          </a>
+        </li>
+        <li>
+          <a href="#benchmarks" class="nav-item" data-tab="tab-benchmarks">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>
+            <span>ML & CUF Benchmarks</span>
+          </a>
+        </li>
+        <li>
+          <a href="#cuf" class="nav-item" data-tab="tab-cuf">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m6.75 12l-3-3m0 0l-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+            <span>CUF Data Pipeline</span>
+          </a>
+        </li>
+        <li>
+          <a href="#assistant" class="nav-item" data-tab="tab-assistant">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg>
+            <span>PAIMANA AI Copilot</span>
+          </a>
+        </li>
+      </ul>
+      
+      <div class="sidebar-footer">
+        <div class="live-pulse-wrapper">
+          <div class="pulse-dot"></div>
+          <span>OCMS + PAIMANA Active</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+      <!-- Top Header -->
+      <header class="top-header">
+        <div class="header-title">
+          <h2>Central Sector Infrastructure Surveillance</h2>
+          <p>Projects Costing ₹150 Crore and Above • 17 Central Ministries • 22 Infrastructure Sectors</p>
+        </div>
+        
+        <div class="header-actions">
+          <div class="portfolio-tag">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <span>1,981 Monitored Assets</span>
+          </div>
+          
+          <button class="btn btn-primary" onclick="document.querySelector('[data-tab=\'tab-cuf\']').click()">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            <span>Ingest CUF Data</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Area -->
+      <main class="content-area">
+        
+        <!-- TAB 1: National Cockpit -->
+        <section id="tab-cockpit" class="tab-pane active">
+          <!-- KPI Cards -->
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-top">
+                <span class="kpi-title">Active Projects</span>
+                <div class="kpi-icon"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg></div>
+              </div>
+              <div class="kpi-value" id="kpi-total-projects">1,981</div>
+              <div class="kpi-sub">
+                <span class="kpi-badge info">17 Ministries</span>
+                <span>Across 22 Sectors</span>
+              </div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-top">
+                <span class="kpi-title">Revised Total Capex</span>
+                <div class="kpi-icon"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+              </div>
+              <div class="kpi-value" id="kpi-revised-capex">₹42.78L Cr</div>
+              <div class="kpi-sub">
+                <span>Original: <strong>₹37.13L Cr</strong></span>
+              </div>
+            </div>
+
+            <div class="kpi-card danger">
+              <div class="kpi-top">
+                <span class="kpi-title">Cumulative Cost Escalation</span>
+                <div class="kpi-icon" style="color:#EF4444;"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></div>
+              </div>
+              <div class="kpi-value" style="color:#F87171;" id="kpi-cost-overrun">₹5.65L Cr</div>
+              <div class="kpi-sub">
+                <span class="kpi-badge up-danger" id="kpi-overrun-pct">+15.2%</span>
+                <span>Aggregate Portfolio Overrun</span>
+              </div>
+            </div>
+
+            <div class="kpi-card" style="border-left: 3px solid #EF4444;">
+              <div class="kpi-top">
+                <span class="kpi-title">Critical Risk Projects</span>
+                <div class="kpi-icon" style="color:#EF4444;"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div>
+              </div>
+              <div class="kpi-value" style="color:#F87171;" id="kpi-critical-count">-- Critical</div>
+              <div class="kpi-sub">
+                <span>Immediate Attention Required</span>
+              </div>
+            </div>
+
+            <div class="kpi-card warning">
+              <div class="kpi-top">
+                <span class="kpi-title">Average Schedule Delay</span>
+                <div class="kpi-icon" style="color:#F59E0B;"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+              </div>
+              <div class="kpi-value" style="color:#FBBF24;" id="kpi-avg-delay">18.4 Mo</div>
+              <div class="kpi-sub">
+                <span id="kpi-delayed-count" style="color:#FBBF24; font-weight:700;">-- Delayed</span>
+                <span>Past Original DoC</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Row -->
+          <div class="charts-grid-3">
+            <div class="glass-card">
+              <div class="card-header">
+                <h3>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                  Sectoral Capex & Cost Escalation Breakdown (Top 10 Sectors)
+                </h3>
+              </div>
+              <div class="chart-container">
+                <canvas id="sector-bar-chart"></canvas>
+              </div>
+            </div>
+
+            <div class="glass-card">
+              <div class="card-header">
+                <h3>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/></svg>
+                  Portfolio Risk Distribution
+                </h3>
+              </div>
+              <div class="chart-container">
+                <canvas id="risk-donut-chart"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 2: Geo-Spatial Map -->
+        <section id="tab-geomap" class="tab-pane">
+          <div class="glass-card" style="padding: 24px;">
+            <div class="card-header">
+              <h3>
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Pan-India State-Wise Infrastructure Risk & Density Heatmap
+              </h3>
+              <span style="font-size: 12px; color: #94A3B8;">Click any state pin to inspect details or filter projects</span>
+            </div>
+            
+            <div id="geo-map-container"></div>
+          </div>
+        </section>
+
+        <!-- TAB 3: Project 360° Explorer -->
+        <section id="tab-explorer" class="tab-pane">
+          <div class="glass-card">
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+              <div class="search-input-wrapper">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input type="text" id="project-search-input" class="form-control" placeholder="Search project name, ID, agency, or city...">
+              </div>
+              
+              <select id="filter-ministry" class="select-control">
+                <option value="ALL">All 17 Ministries</option>
+                <option value="MoRTH">MoRTH (Highways)</option>
+                <option value="MoR">MoR (Railways)</option>
+                <option value="MoPNG">MoPNG (Petroleum)</option>
+                <option value="MoP">MoP (Power)</option>
+                <option value="MoCoal">MoCoal (Coal)</option>
+                <option value="MoHUA">MoHUA (Urban/Metro)</option>
+                <option value="MoPSW">MoPSW (Ports)</option>
+                <option value="MoCA">MoCA (Airports)</option>
+              </select>
+
+              <select id="filter-sector" class="select-control">
+                <option value="ALL">All 22 Sectors</option>
+              </select>
+
+              <select id="filter-state" class="select-control">
+                <option value="ALL">All States / UTs</option>
+              </select>
+
+              <select id="filter-risk" class="select-control">
+                <option value="ALL">All Risk Tiers</option>
+                <option value="CRITICAL">Critical Risk (70-100)</option>
+                <option value="MODERATE">Moderate / Watchlist (40-69)</option>
+                <option value="LOW">Low / On-Track (0-39)</option>
+              </select>
+
+              <select id="filter-sort" class="select-control">
+                <option value="revised_cost_cr">Sort by Revised Capex</option>
+                <option value="cost_overrun_cr">Sort by Cost Escalation (₹ Cr)</option>
+                <option value="schedule_delay_months">Sort by Delay Months</option>
+                <option value="composite_risk_score">Sort by Risk Score</option>
+              </select>
+            </div>
+
+            <!-- Table Header info -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span id="project-results-count" style="font-size: 12px; color: #94A3B8;">Loading projects...</span>
+              <span style="font-size: 11px; color: #0EA5E9; font-weight: 600;">Click any row to open 360° Dossier & S-Curve</span>
+            </div>
+
+            <!-- Table -->
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Project Name & Code</th>
+                    <th>Ministry / Sector</th>
+                    <th>State</th>
+                    <th>Revised Capex (Overrun)</th>
+                    <th>Schedule Status</th>
+                    <th>Physical Progress</th>
+                    <th>Risk Index</th>
+                  </tr>
+                </thead>
+                <tbody id="projects-table-body">
+                  <!-- Injected via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Pagination Bar -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border-subtle);">
+              <button id="btn-prev-page" class="btn btn-secondary">Previous</button>
+              <span id="current-page-display" style="font-size: 13px; color: #94A3B8;">Page 1 of --</span>
+              <button id="btn-next-page" class="btn btn-secondary">Next</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 4: What-If Sandbox -->
+        <section id="tab-simulator" class="tab-pane">
+          <div class="simulator-container">
+            <!-- Controls Panel -->
+            <div class="glass-card">
+              <div class="card-header">
+                <h3>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+                  Simulation Levers
+                </h3>
+              </div>
+
+              <div style="margin-bottom: 20px;">
+                <label style="font-size: 12px; color: #94A3B8; display: block; margin-bottom: 6px;">Target Infrastructure Project:</label>
+                <select id="sim-project-select" class="select-control" style="width: 100%;"></select>
+              </div>
+
+              <!-- Slider 1: Land Acquisition Delta -->
+              <div class="slider-group">
+                <div class="slider-header">
+                  <span>Right-of-Way Land Handover Delta</span>
+                  <span id="sim-land-val" class="slider-val">0%</span>
+                </div>
+                <input type="range" id="sim-land-slider" class="slider-input" min="-40" max="30" step="5" value="0">
+              </div>
+
+              <!-- Slider 2: Additional Delay -->
+              <div class="slider-group">
+                <div class="slider-header">
+                  <span>Additional Schedule Delay</span>
+                  <span id="sim-delay-val" class="slider-val">+0 Mo</span>
+                </div>
+                <input type="range" id="sim-delay-slider" class="slider-input" min="0" max="36" step="2" value="0">
+              </div>
+
+              <!-- Slider 3: Material Inflation Surge -->
+              <div class="slider-group">
+                <div class="slider-header">
+                  <span>Raw Material Inflation Surge (Steel/Cement)</span>
+                  <span id="sim-inflation-val" class="slider-val">+0%</span>
+                </div>
+                <input type="range" id="sim-inflation-slider" class="slider-input" min="0" max="30" step="5" value="0">
+              </div>
+
+              <!-- Slider 4: Contractor Disputes -->
+              <div class="slider-group">
+                <div class="slider-header">
+                  <span>Active Contractor Disputes Delta</span>
+                  <span id="sim-disputes-val" class="slider-val">+0</span>
+                </div>
+                <input type="range" id="sim-disputes-slider" class="slider-input" min="0" max="4" step="1" value="0">
+              </div>
+            </div>
+
+            <!-- Dynamic Simulation Output -->
+            <div class="glass-card">
+              <div class="card-header">
+                <h3>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                  Real-Time AI Predictive Recalculation
+                </h3>
+              </div>
+
+              <div class="kpi-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 20px;">
+                <div class="sim-impact-box">
+                  <div style="font-size: 11px; color: #94A3B8;">Predicted Revised Capex</div>
+                  <div id="sim-res-cost-pred" style="font-size: 20px; font-weight: 800; color: #38BDF8;">--</div>
+                  <div id="sim-res-cost-pct" style="font-size: 12px; color: #EF4444; font-weight: 600;">--</div>
+                  <div id="sim-res-cost-delta" style="font-size: 11px; margin-top: 4px; font-weight: 700;">--</div>
+                </div>
+
+                <div class="sim-impact-box">
+                  <div style="font-size: 11px; color: #94A3B8;">Predicted Schedule Slippage</div>
+                  <div id="sim-res-delay-pred" style="font-size: 20px; font-weight: 800; color: #F59E0B;">--</div>
+                  <div id="sim-res-delay-delta" style="font-size: 12px; color: #FBBF24; font-weight: 600;">--</div>
+                </div>
+
+                <div class="sim-impact-box">
+                  <div style="font-size: 11px; color: #94A3B8;">Composite Risk Index (PRSF)</div>
+                  <div id="sim-res-risk-score" style="font-size: 20px; font-weight: 800;">--</div>
+                  <span id="sim-res-risk-badge" class="badge">--</span>
+                </div>
+              </div>
+
+              <div style="height: 280px; width: 100%;">
+                <canvas id="sim-risk-radar-chart"></canvas>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 5: Early Warning Alert Center -->
+        <section id="tab-ewas" class="tab-pane">
+          <div class="glass-card">
+            <div class="card-header">
+              <div>
+                <h3>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                  Early Warning Alert Surveillance Center
+                </h3>
+                <p style="font-size: 12px; color: #94A3B8; margin-top: 2px;">Proactive identification of projects at imminent risk of schedule stagnation or severe budget escalation.</p>
+              </div>
+              <span id="ewas-total-badge" class="badge badge-critical" style="font-size: 13px; padding: 6px 14px;">-- Active Alarms</span>
+            </div>
+
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Severity</th>
+                    <th>Alert Title & Trigger Category</th>
+                    <th>Project Name & Location</th>
+                    <th>Diagnosed Root Cause</th>
+                    <th>Prescribed Policy / Administrative Intervention</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="ewas-table-body">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 6: ML Benchmarks & CUF Attribution -->
+        <section id="tab-benchmarks" class="tab-pane">
+          <!-- Quantitative Gains Row -->
+          <div class="kpi-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 24px;">
+            <div class="kpi-card success">
+              <div class="kpi-top">
+                <span class="kpi-title">Cost Prediction Error Reduction</span>
+                <div class="kpi-icon" style="color: #10B981;">📉</div>
+              </div>
+              <div class="kpi-value" id="bench-cost-gain" style="color: #34D399;">--%</div>
+              <div class="kpi-sub">AI/ML vs Conventional Statistical Baseline</div>
+            </div>
+
+            <div class="kpi-card success">
+              <div class="kpi-top">
+                <span class="kpi-title">Schedule Delay MAE Improvement</span>
+                <div class="kpi-icon" style="color: #10B981;">⏱️</div>
+              </div>
+              <div class="kpi-value" id="bench-delay-gain" style="color: #34D399;">--%</div>
+              <div class="kpi-sub">Ensemble GBDT vs Historical Sector Mean</div>
+            </div>
+
+            <div class="kpi-card success">
+              <div class="kpi-top">
+                <span class="kpi-title">Classification Accuracy Gain</span>
+                <div class="kpi-icon" style="color: #10B981;">🎯</div>
+              </div>
+              <div class="kpi-value" id="bench-acc-gain" style="color: #34D399;">+--%</div>
+              <div class="kpi-sub">High Escalation Risk Prediction Accuracy</div>
+            </div>
+          </div>
+
+          <div class="charts-grid-2">
+            <!-- Regression Comparison -->
+            <div class="glass-card">
+              <div class="card-header">
+                <h3>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/></svg>
+                  Conventional Statistical Baseline vs ML Regression Models
+                </h3>
+              </div>
+              <div class="chart-container">
+                <canvas id="benchmark-bar-chart"></canvas>
+              </div>
+            </div>
+
+            <!-- ROC Curves -->
+            <div class="glass-card">
+              <div class="card-header">
+                <h3>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                  Receiver Operating Characteristic (ROC-AUC Curves)
+                </h3>
+              </div>
+              <div class="chart-container">
+                <canvas id="roc-curves-chart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- CUF Feature Attribution Study Row -->
+          <div class="charts-grid-3" style="margin-top: 24px;">
+            <div class="glass-card">
+              <div class="card-header">
+                <h3>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  CUF Fields vs Augmented Variables Feature Importance Ranking
+                </h3>
+              </div>
+              <div id="cuf-rankings-list"></div>
+            </div>
+
+            <div class="glass-card">
+              <div class="card-header">
+                <h3>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/></svg>
+                  Predictive Signal Share
+                </h3>
+              </div>
+              <div class="chart-container" style="height: 250px;">
+                <canvas id="cuf-attribution-donut"></canvas>
+              </div>
+              <div style="font-size: 11px; color: #94A3B8; text-align: center; margin-top: 8px;">
+                Evaluating Theme Dimension (c): Native CUF vs Exogenous Indicators
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 7: CUF Pipeline -->
+        <section id="tab-cuf" class="tab-pane">
+          <div class="glass-card">
+            <div class="card-header">
+              <div>
+                <h3>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                  Common Upload Form (CUF) Monthly Ingestion & AI Schema Auditor
+                </h3>
+                <p style="font-size: 12px; color: #94A3B8;">Upload or paste project progress CUF records for instant schema verification and AI early warning audits.</p>
+              </div>
+
+              <button id="btn-load-sample-cuf" class="btn btn-secondary">Load Sample CUF Template</button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+              <div>
+                <label style="font-size: 12px; color: #94A3B8; display: block; margin-bottom: 6px;">CUF JSON Input Data:</label>
+                <textarea id="cuf-json-input" class="form-control" style="height: 320px; font-family: monospace; font-size: 12px; padding: 12px;" placeholder="Paste CUF JSON submission array here..."></textarea>
+                <button id="btn-validate-cuf" class="btn btn-primary" style="margin-top: 14px; width: 100%; justify-content: center;">
+                  Execute AI Schema Validation & Risk Audit
+                </button>
+              </div>
+
+              <div id="cuf-validation-results" style="background: rgba(10,16,30,0.5); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 20px; overflow-y: auto; max-height: 400px;">
+                <div style="text-align: center; color: #64748B; padding-top: 80px;">
+                  Upload or paste CUF records and click validate to run the real-time AI compliance audit.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 8: Assistant Copilot -->
+        <section id="tab-assistant" class="tab-pane">
+          <div class="chat-window">
+            <div class="chat-messages" id="chat-messages-container">
+              <div class="message-bubble assistant">
+                👋 <strong>Namaste! I am PAIMANA AI (IPMD Sahayak).</strong><br/>
+                I have full contextual awareness over the <strong>1,981 Central Sector Infrastructure Projects</strong> tracked across 17 Central Ministries and 22 Sectors.<br/><br/>
+                How can I assist you today? You can query projects by State, Sector, Cost Overrun, Schedule Delay, or ask me to draft an official MoSPI Executive Intervention Brief.
+              </div>
+            </div>
+
+            <div class="quick-prompts">
+              <div class="prompt-chip">Show top 5 Railway projects with highest cost escalation</div>
+              <div class="prompt-chip">Which projects in Maharashtra face land acquisition bottlenecks?</div>
+              <div class="prompt-chip">Summarize critical projects in Power Transmission</div>
+              <div class="prompt-chip">Explain CUF feature attribution analysis findings</div>
+            </div>
+
+            <div class="chat-input-bar">
+              <input type="text" id="chat-input-text" class="form-control" placeholder="Ask PAIMANA AI any project or policy question..." style="padding-left: 16px;">
+              <button id="btn-send-chat" class="btn btn-primary">
+                <span>Send</span>
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/></svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Project 360° Sliding Drawer Modal -->
+  <div id="project-drawer-modal" class="modal-overlay">
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <div>
+          <h3 id="drawer-project-name" style="font-family: Outfit, sans-serif; font-size: 20px; color: #F8FAFC;">Project Title</h3>
+          <p id="drawer-project-id" style="font-size: 12px; color: #94A3B8; margin-top: 4px;">ID | Ministry</p>
+        </div>
+        <button id="btn-close-drawer" class="close-btn">✕</button>
+      </div>
+
+      <!-- Financial Metrics Grid -->
+      <div class="kpi-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 0;">
+        <div class="kpi-card" style="padding: 14px;">
+          <div style="font-size: 11px; color: #94A3B8;">Original Cost</div>
+          <div id="drawer-orig-cost" style="font-size: 16px; font-weight: 700; color: #F8FAFC;">₹-- Cr</div>
+        </div>
+        <div class="kpi-card" style="padding: 14px;">
+          <div style="font-size: 11px; color: #94A3B8;">Revised Cost</div>
+          <div id="drawer-rev-cost" style="font-size: 16px; font-weight: 700; color: #38BDF8;">₹-- Cr</div>
+        </div>
+        <div class="kpi-card" style="padding: 14px;">
+          <div style="font-size: 11px; color: #94A3B8;">Escalation</div>
+          <div id="drawer-overrun" style="font-size: 16px; font-weight: 700; color: #EF4444;">+₹-- Cr</div>
+        </div>
+      </div>
+
+      <div class="kpi-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom: 0;">
+        <div class="kpi-card" style="padding: 14px;">
+          <div style="font-size: 11px; color: #94A3B8;">Capex Expended</div>
+          <div id="drawer-exp" style="font-size: 16px; font-weight: 700; color: #10B981;">₹-- Cr</div>
+        </div>
+        <div class="kpi-card" style="padding: 14px;">
+          <div style="font-size: 11px; color: #94A3B8;">Physical Progress</div>
+          <div id="drawer-phys" style="font-size: 16px; font-weight: 700; color: #F8FAFC;">--%</div>
+        </div>
+        <div class="kpi-card" style="padding: 14px;">
+          <div style="font-size: 11px; color: #94A3B8;">Schedule Delay</div>
+          <div id="drawer-delay" style="font-size: 16px; font-weight: 700; color: #F59E0B;">-- Mo</div>
+        </div>
+      </div>
+
+      <!-- AI Predictions Box -->
+      <div style="background: rgba(14,165,233,0.1); border: 1px solid rgba(14,165,233,0.3); border-radius: 12px; padding: 18px;">
+        <h4 style="font-family: Outfit, sans-serif; font-size: 15px; color: #38BDF8; margin-bottom: 12px;">🤖 AI Predictive Risk & Escalation Forecast</h4>
+        <div style="display: flex; gap: 24px; font-size: 13px;">
+          <div>Composite Risk Index: <strong id="drawer-risk-score" style="font-size: 15px;">--</strong></div>
+          <div>ML Forecast Cost: <strong id="drawer-ai-cost-pred" style="color:#38BDF8;">--</strong></div>
+          <div>ML Forecast Delay: <strong id="drawer-ai-delay-pred" style="color:#FBBF24;">--</strong></div>
+        </div>
+      </div>
+
+      <!-- S-Curve Chart -->
+      <div>
+        <h4 style="font-family: Outfit, sans-serif; font-size: 15px; color: #F8FAFC; margin-bottom: 8px;">Planned vs Actual vs AI Predicted S-Curve Trajectory</h4>
+        <div style="height: 240px; width: 100%;">
+          <canvas id="drawer-s-curve-chart"></canvas>
+        </div>
+      </div>
+
+      <!-- Radar Chart -->
+      <div>
+        <h4 style="font-family: Outfit, sans-serif; font-size: 15px; color: #F8FAFC; margin-bottom: 8px;">5-Dimensional Project Risk Radar Breakdown</h4>
+        <div style="height: 220px; width: 100%;">
+          <canvas id="drawer-radar-chart"></canvas>
+        </div>
+      </div>
+
+      <!-- Active Early Warning Alarms -->
+      <div>
+        <h4 style="font-family: Outfit, sans-serif; font-size: 15px; color: #F8FAFC; margin-bottom: 8px;">Active Early Warning Alarms & Action Directives</h4>
+        <div id="drawer-alerts-list"></div>
+      </div>
+
+      <!-- Drawer Action Buttons -->
+      <div style="display: flex; gap: 12px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border-subtle);">
+        <button id="btn-generate-memo" class="btn btn-primary" style="flex: 1; justify-content: center;">
+          📄 Generate MoSPI Escalation Brief
+        </button>
+        <button id="btn-open-in-sim" class="btn btn-secondary" style="flex: 1; justify-content: center;">
+          ⚡ Open in What-If Simulator
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MoSPI Executive Memo Modal -->
+  <div id="brief-modal" class="modal-overlay" style="justify-content: center;">
+    <div class="glass-card" style="width: 720px; max-width: 90vw; max-height: 85vh; display: flex; flex-direction: column; background: #0B132B; border: 1px solid #38BDF8;">
+      <div class="card-header">
+        <h3>🏛️ MoSPI IPMD Project Escalation Memorandum</h3>
+        <button id="btn-close-brief" class="close-btn">✕</button>
+      </div>
+      <div style="flex: 1; overflow-y: auto; background: #070B14; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 20px; margin-bottom: 16px;">
+        <pre id="brief-memo-text" style="font-family: 'Courier New', monospace; font-size: 12px; color: #CBD5E1; white-space: pre-wrap; line-height: 1.5;"></pre>
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 12px;">
+        <button id="btn-download-brief" class="btn btn-primary">⬇️ Download Official Memorandum (.txt)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="/static/js/charts.js"></script>
+  <script src="/static/js/map.js"></script>
+  <script src="/static/js/simulator.js"></script>
+  <script src="/static/js/cuf_handler.js"></script>
+  <script src="/static/js/assistant.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
