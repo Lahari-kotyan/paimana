@@ -113,6 +113,35 @@ def list_projects(
         "projects": page_items
     }
 
+@router.get("/dropdown/list")
+def get_dropdown_projects():
+    """
+    Returns lightweight identifier and summary records for all 1,981 projects.
+    """
+    projects = load_projects_json()
+    return [
+        {
+            "project_id": p["project_id"],
+            "project_name": p["project_name"],
+            "ministry_code": p["ministry_code"],
+            "sector_name": p["sector_name"],
+            "state": p["state"],
+            "agency_name": p.get("agency_name", ""),
+            "revised_cost_cr": p.get("revised_cost_cr", 0.0),
+            "original_cost_cr": p.get("original_cost_cr", 0.0),
+            "cost_overrun_cr": p.get("cost_overrun_cr", 0.0),
+            "cost_overrun_pct": p.get("cost_overrun_pct", 0.0),
+            "physical_progress_pct": p.get("physical_progress_pct", 0.0),
+            "financial_progress_pct": p.get("financial_progress_pct", 0.0),
+            "schedule_delay_months": p.get("schedule_delay_months", 0),
+            "anticipated_doc": p.get("anticipated_doc", p.get("original_doc", "")),
+            "original_doc": p.get("original_doc", ""),
+            "location_lat": p.get("location_lat", 0.0),
+            "location_lng": p.get("location_lng", 0.0)
+        }
+        for p in projects
+    ]
+
 @router.get("/{project_id}")
 def get_project_detail(project_id: str):
     """

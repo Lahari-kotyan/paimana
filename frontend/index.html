@@ -69,6 +69,12 @@
           </a>
         </li>
         <li>
+          <a href="#evidence" class="nav-item" data-tab="tab-evidence">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0c-.698.04-1.348.42-1.736 1.039l-.821 1.316z"/><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/></svg>
+            <span>Contractor Geo-Evidence</span>
+          </a>
+        </li>
+        <li>
           <a href="#assistant" class="nav-item" data-tab="tab-assistant">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" /></svg>
             <span>PAIMANA AI Copilot</span>
@@ -570,6 +576,216 @@
           </div>
         </section>
 
+        <!-- TAB 9: Contractor Geo-Evidence & Public Verification -->
+        <section id="tab-evidence" class="tab-pane">
+          <!-- Top Project Selection & Control Bar -->
+          <div class="glass-card" style="margin-bottom: 20px;">
+            <div class="card-header">
+              <div>
+                <h3>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0c-.698.04-1.348.42-1.736 1.039l-.821 1.316z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/></svg>
+                  Contractor Geo-Evidence & Ground Verification Surveillance
+                </h3>
+                <p style="font-size: 12px; color: #94A3B8;">Mandatory GPS-stamped multi-stage visual documentation & community ground audit for Central Sector Projects.</p>
+              </div>
+
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <button class="btn btn-primary" onclick="EvidenceHandler.openUploadModal('ongoing')">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                  <span>Upload Stage Evidence</span>
+                </button>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 16px; margin-bottom: 16px; align-items: flex-end;">
+              <div>
+                <label style="font-size: 12px; color: #94A3B8; display: block; margin-bottom: 6px; font-weight: 600;">🔍 Fast Project Search (1,981 Assets):</label>
+                <div class="search-input-wrapper">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                  <input type="text" id="evidence-project-search" class="form-control" placeholder="Type Project ID (e.g. 1030), city, state...">
+                </div>
+              </div>
+
+              <div>
+                <label style="font-size: 12px; color: #94A3B8; display: block; margin-bottom: 6px; font-weight: 600;">Select Monitored Project ID:</label>
+                <select id="evidence-project-select" class="select-control" style="width: 100%; font-size: 13px;">
+                  <option value="PAIMANA-SEC_PET-2020-1030">PAIMANA-SEC_PET-2020-1030 — Strategic Petroleum Reserve Underground Rock Caverns at Vadodara [MoPNG | Gujarat]</option>
+                  <option value="PAIMANA-SEC_INLAND-2015-1001">PAIMANA-SEC_INLAND-2015-1001 — National Waterway NW-32 Multimodal Navigation Terminal at Bongaigaon [MoPSW | Assam]</option>
+                  <option value="PAIMANA-SEC_HWY-2016-1002">PAIMANA-SEC_HWY-2016-1002 — Economic Corridor NH-52 6-Lane Highway [MoRTH | Punjab]</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Dynamic Project Summary Banner -->
+            <div id="evidence-project-summary" style="background: rgba(10, 16, 30, 0.6); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 16px;">
+              <!-- Injected by JavaScript -->
+            </div>
+          </div>
+
+          <!-- 3 Stages Evidence Grid -->
+          <div style="margin-bottom: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <h4 style="font-family: Outfit, sans-serif; font-size: 16px; color: #F8FAFC; display: flex; align-items: center; gap: 8px;">
+                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #38BDF8;"></span>
+                Project Lifecycle Multi-Stage Geo-Evidence Record
+              </h4>
+              <span style="font-size: 12px; color: #94A3B8;">Strict Project ID Isolation Active</span>
+            </div>
+
+            <div class="evidence-stages-grid">
+              <!-- Stage 1: Before Construction -->
+              <div class="glass-card" style="display: flex; flex-direction: column;">
+                <div class="stage-header">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="stage-number">1</span>
+                    <div>
+                      <h4 style="font-size: 14px; font-weight: 700; color: #F8FAFC;">BEFORE CONSTRUCTION</h4>
+                      <span style="font-size: 11px; color: #94A3B8;">Greenfield / Baseline Survey</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary" onclick="EvidenceHandler.openUploadModal('before')" style="padding: 4px 10px; font-size: 11px;">+ Add</button>
+                </div>
+                <div id="evidence-stage-before" style="flex: 1;">
+                  <!-- Injected via JS or Shows Evidence Yet to Upload -->
+                </div>
+              </div>
+
+              <!-- Stage 2: Ongoing Construction -->
+              <div class="glass-card" style="display: flex; flex-direction: column;">
+                <div class="stage-header">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="stage-number ongoing">2</span>
+                    <div>
+                      <h4 style="font-size: 14px; font-weight: 700; color: #38BDF8;">ONGOING CONSTRUCTION</h4>
+                      <span style="font-size: 11px; color: #94A3B8;">Milestone & Physical Progress</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary" onclick="EvidenceHandler.openUploadModal('ongoing')" style="padding: 4px 10px; font-size: 11px;">+ Add</button>
+                </div>
+                <div id="evidence-stage-ongoing" style="flex: 1;">
+                  <!-- Injected via JS or Shows Evidence Yet to Upload -->
+                </div>
+              </div>
+
+              <!-- Stage 3: After / Completion -->
+              <div class="glass-card" style="display: flex; flex-direction: column;">
+                <div class="stage-header">
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="stage-number completed">3</span>
+                    <div>
+                      <h4 style="font-size: 14px; font-weight: 700; color: #34D399;">AFTER / COMPLETION</h4>
+                      <span style="font-size: 11px; color: #94A3B8;">Commissioning & Handover</span>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary" onclick="EvidenceHandler.openUploadModal('after')" style="padding: 4px 10px; font-size: 11px;">+ Add</button>
+                </div>
+                <div id="evidence-stage-after" style="flex: 1;">
+                  <!-- Injected via JS or Shows Evidence Yet to Upload -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PUBLIC / COMMUNITY GROUND VERIFICATION SECTION -->
+          <div class="glass-card">
+            <div class="card-header">
+              <div>
+                <h3>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                  Public & Community Ground Verification Audit
+                </h3>
+                <p style="font-size: 12px; color: #94A3B8;">Independent citizen inspection and ground reality reporting for the selected project.</p>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span id="public-overall-status-badge" class="badge">Awaiting Review</span>
+                <span id="public-verification-count" class="badge" style="background: rgba(255,255,255,0.05); color: #CBD5E1;">0 Audits</span>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px;">
+              <!-- Left: Verification Form -->
+              <div style="background: rgba(10, 16, 30, 0.5); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 20px;">
+                <h4 style="font-family: Outfit, sans-serif; font-size: 15px; color: #F8FAFC; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                  <span>📝 Submit Ground Verification</span>
+                </h4>
+
+                <form id="form-public-verification">
+                  <div style="margin-bottom: 12px;">
+                    <label style="font-size: 12px; color: #94A3B8; display: block; margin-bottom: 4px;">Project Completion Status:</label>
+                    <select id="public-status-select" class="select-control" style="width: 100%;">
+                      <option value="On Track">On Track / Progress Visible</option>
+                      <option value="Minor Delay">Minor Delay / Slow Pacing</option>
+                      <option value="Severe Delay">Severe Delay / Minimal Workers</option>
+                      <option value="Stalled">Completely Stalled / No Activity</option>
+                      <option value="Completed">Completed & Functional</option>
+                    </select>
+                  </div>
+
+                  <div style="margin-bottom: 12px;">
+                    <label style="font-size: 12px; color: #94A3B8; display: block; margin-bottom: 4px;">Does Ground Reality Match Reported Progress?</label>
+                    <select id="public-ground-match-select" class="select-control" style="width: 100%;">
+                      <option value="Yes">Yes — Fully Matches Reported Status</option>
+                      <option value="Partial">Partial — Moderate Discrepancy Found</option>
+                      <option value="No">No — Significant Mismatch / False Claim</option>
+                    </select>
+                  </div>
+
+                  <div style="margin-bottom: 12px;">
+                    <label style="font-size: 12px; color: #94A3B8; display: block; margin-bottom: 4px;">Visible Issues / Defects:</label>
+                    <select id="public-defects-select" class="select-control" style="width: 100%;">
+                      <option value="None">None (Good Quality & Clean Execution)</option>
+                      <option value="Structural Cracks / Defects">Structural Cracks / Surface Damage</option>
+                      <option value="Substandard Construction Materials">Substandard Materials / Poor Concrete</option>
+                      <option value="Incomplete Drainage & Waterlogging">Incomplete Drainage / Waterlogging</option>
+                      <option value="Traffic Choke & Poor Signage">Safety Hazards / Poor Site Barricading</option>
+                      <option value="Machinery Idling & Inactive Site">Idle Machinery & Abandoned Works</option>
+                    </select>
+                  </div>
+
+                  <div style="margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                      <label style="font-size: 12px; color: #94A3B8;">GPS Coordinates (Lat, Long):</label>
+                      <button type="button" id="btn-get-public-gps" class="btn btn-secondary" style="padding: 2px 8px; font-size: 11px;">📍 Auto-Detect GPS</button>
+                    </div>
+                    <input type="text" id="public-gps-input" class="form-control" placeholder="e.g. 26.1397, 92.6714">
+                    <div id="public-geo-check-feedback" style="margin-top: 6px; font-size: 11px; padding: 6px 10px; border-radius: 6px; display: none;"></div>
+                  </div>
+
+                  <div style="margin-bottom: 12px;">
+                    <label style="font-size: 12px; color: #94A3B8; display: block; margin-bottom: 4px;">Supporting Ground Photo / Video (Optional):</label>
+                    <input type="file" id="public-file-input" class="form-control" accept="image/*,video/*" style="padding: 6px;">
+                    <div id="public-preview-container" style="display: none; margin-top: 8px;">
+                      <img id="public-preview-img" style="max-height: 100px; border-radius: 6px; object-fit: cover;" alt="Preview">
+                    </div>
+                  </div>
+
+                  <div style="margin-bottom: 16px;">
+                    <label style="font-size: 12px; color: #94A3B8; display: block; margin-bottom: 4px;">Citizen Review & Ground Comments *:</label>
+                    <textarea id="public-comments-input" class="form-control" style="height: 80px; font-size: 12px;" placeholder="Describe your observations on site, workforce presence, material quality, and adherence to milestones..." required></textarea>
+                  </div>
+
+                  <button type="submit" id="btn-submit-public-review" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                    Submit Ground Verification Audit
+                  </button>
+                </form>
+              </div>
+
+              <!-- Right: Verification Feed -->
+              <div>
+                <h4 style="font-family: Outfit, sans-serif; font-size: 15px; color: #F8FAFC; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
+                  <span>🔍 Verified Citizen Audits for Selected Project</span>
+                  <span style="font-size: 11px; color: #38BDF8; font-weight: normal;">Live Linked to Project ID</span>
+                </h4>
+
+                <div id="public-reviews-list" style="display: flex; flex-direction: column; gap: 12px; max-height: 480px; overflow-y: auto; padding-right: 4px;">
+                  <!-- Injected via JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </main>
     </div>
   </div>
@@ -676,11 +892,83 @@
     </div>
   </div>
 
+  <!-- Contractor Stage Evidence Upload Modal -->
+  <div id="evidence-upload-modal" class="modal-overlay" style="justify-content: center;">
+    <div class="glass-card" style="width: 580px; max-width: 92vw; max-height: 90vh; overflow-y: auto; background: #0B132B; border: 1px solid #38BDF8;">
+      <div class="card-header">
+        <h3 id="evidence-modal-stage-title">UPLOAD STAGE EVIDENCE</h3>
+        <button id="btn-close-evidence-modal" class="close-btn">✕</button>
+      </div>
+
+      <form id="form-submit-evidence">
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 12px; color: #94A3B8; display: block; margin-bottom: 4px;">Evidence Stage:</label>
+          <select id="modal-stage-select" class="select-control" style="width: 100%;" onchange="EvidenceHandler.updateModalFields(this.value)">
+            <option value="before">Stage 1: Before Construction (Baseline)</option>
+            <option value="ongoing">Stage 2: Ongoing Construction (Milestone)</option>
+            <option value="after">Stage 3: After / Completion (Commissioning)</option>
+          </select>
+        </div>
+
+        <div id="modal-stagename-group" style="margin-bottom: 14px;">
+          <label style="font-size: 12px; color: #94A3B8; display: block; margin-bottom: 4px;">Current Construction Sub-Stage:</label>
+          <select id="modal-stagename-select" class="select-control" style="width: 100%;">
+            <option value="Earthwork & Site Prep">Earthwork & Site Prep</option>
+            <option value="Substructure & Foundations">Substructure & Foundations</option>
+            <option value="Superstructure & Structural Framing">Superstructure & Structural Framing</option>
+            <option value="Track Laying / Pavement Works">Track Laying / Pavement Works</option>
+            <option value="MEP, Electrical & Signaling">MEP, Electrical & Signaling</option>
+            <option value="Finishing & Commissioning Trials">Finishing & Commissioning Trials</option>
+          </select>
+        </div>
+
+        <div id="modal-progress-group" style="margin-bottom: 14px;">
+          <label style="font-size: 12px; color: #94A3B8; display: block; margin-bottom: 4px;">Reported Physical Progress (%):</label>
+          <input type="number" id="modal-progress-input" class="form-control" min="0" max="100" step="0.1" value="50">
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 12px; color: #94A3B8; display: block; margin-bottom: 4px;">Upload Photo / Video Evidence:</label>
+          <input type="file" id="evidence-file-input" class="form-control" accept="image/*,video/*" style="padding: 6px;">
+          <div id="evidence-preview-container" style="display: none; margin-top: 10px;">
+            <img id="evidence-preview-img" style="max-height: 160px; width: 100%; border-radius: 6px; object-fit: cover;" alt="Preview">
+            <video id="evidence-preview-video" style="max-height: 160px; width: 100%; border-radius: 6px; display: none;" controls></video>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <label style="font-size: 12px; color: #94A3B8;">GPS Coordinates (Lat, Long) *:</label>
+            <button type="button" id="btn-get-evidence-gps" class="btn btn-secondary" style="padding: 2px 8px; font-size: 11px;">📍 Auto-Detect GPS</button>
+          </div>
+          <input type="text" id="evidence-gps-input" class="form-control" placeholder="e.g. 26.1397, 92.6714" required>
+          <div id="modal-geo-check-feedback" style="margin-top: 6px; font-size: 11px; padding: 6px 10px; border-radius: 6px; display: none;"></div>
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <label style="font-size: 12px; color: #94A3B8; display: block; margin-bottom: 4px;">Date & Timestamp:</label>
+          <input type="datetime-local" id="evidence-datetime-input" class="form-control">
+        </div>
+
+        <div style="margin-bottom: 18px;">
+          <label style="font-size: 12px; color: #94A3B8; display: block; margin-bottom: 4px;">Contractor Remarks / Milestone Notes:</label>
+          <textarea id="evidence-remarks-input" class="form-control" style="height: 75px; font-size: 12px;" placeholder="Provide details regarding active work fronts, contractor team, structural tests completed..."></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 10px;">
+          <button type="button" class="btn btn-secondary" onclick="document.getElementById('evidence-upload-modal').classList.remove('active')">Cancel</button>
+          <button type="submit" id="btn-submit-modal-evidence" class="btn btn-primary">Submit Geo-Evidence</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- JavaScript Modules -->
   <script src="/static/js/charts.js"></script>
   <script src="/static/js/map.js"></script>
   <script src="/static/js/simulator.js"></script>
   <script src="/static/js/cuf_handler.js"></script>
+  <script src="/static/js/evidence_handler.js"></script>
   <script src="/static/js/assistant.js"></script>
   <script src="/static/js/app.js"></script>
 </body>

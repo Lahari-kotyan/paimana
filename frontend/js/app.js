@@ -45,6 +45,9 @@ const App = {
     SimulatorEngine.init(this.state.projects);
     CUFHandler.init();
     AssistantEngine.init();
+    if (typeof EvidenceHandler !== 'undefined') {
+      EvidenceHandler.init(this.state.projects);
+    }
   },
 
   setupNavigation() {
@@ -72,6 +75,12 @@ const App = {
           ChartEngine.renderROCChart('roc-curves-chart', this.state.benchmarks.roc_curves);
           if (this.state.cufAttribution.attribution_summary) {
             ChartEngine.renderAttributionDonut('cuf-attribution-donut', this.state.cufAttribution);
+          }
+        }
+
+        if (tabTarget === 'tab-evidence' && typeof EvidenceHandler !== 'undefined') {
+          if (!EvidenceHandler.projectsList || EvidenceHandler.projectsList.length === 0) {
+            EvidenceHandler.init(this.state.projects);
           }
         }
       });

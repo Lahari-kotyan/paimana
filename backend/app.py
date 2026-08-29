@@ -21,7 +21,8 @@ from backend.routes import (
     prediction_routes,
     cuf_routes,
     ewas_routes,
-    chat_routes
+    chat_routes,
+    evidence_routes
 )
 from backend.models.ml_engine import ml_engine
 
@@ -48,6 +49,7 @@ app.include_router(prediction_routes.router)
 app.include_router(cuf_routes.router)
 app.include_router(ewas_routes.router)
 app.include_router(chat_routes.router)
+app.include_router(evidence_routes.router)
 
 # Startup event to warm up models & datasets
 @app.on_event("startup")
